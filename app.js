@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 var session = require("express-session");
+var passport = require('passport');
 
 const HOST = process.env.HOST || "localhost";
 const PORT = process.env.PORT || 27017;
@@ -20,6 +21,8 @@ mongoose.connect(
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var authRouter = require("./routes/auth");
+var signupRouter = require("./routes/signup");
 
 var app = express();
 
@@ -42,9 +45,13 @@ app.use(
     }
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/auth", authRouter);
+app.use("/signup", signupRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

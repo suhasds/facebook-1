@@ -4,10 +4,10 @@ block content
   .card.card-default
     .card-header Register
     .card-body
-      if messages
-        ul
-          for message in messages
-            - message
+      //- if messages
+      //-   ul
+      //-     for message in messages
+      //-       - message
 
       form(action="/signup", method="POST")
         .form-group
