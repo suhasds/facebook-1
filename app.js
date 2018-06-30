@@ -3,6 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+
+const HOST = process.env.HOST || "localhost";
+const PORT = process.env.PORT || 27017;
+
+mongoose.connect(`mongodb://${HOST}:${PORT}/facebook`);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
