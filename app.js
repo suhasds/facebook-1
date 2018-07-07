@@ -6,9 +6,13 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var session = require("express-session");
 var passport = require('passport');
+var crypto = require("crypto");
+var connect_mongo = require("connect-mongo");
+var MongoDBStore = connect_mongo(session);
 
 const HOST = process.env.HOST || "localhost";
 const PORT = process.env.PORT || 27017;
+const ONE_WEEK = 60*24*7*60*1000;
 
 mongoose.connect(
   `mongodb://${HOST}:${PORT}/facebook`,
@@ -37,12 +41,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: crypto.randomBytes(64).toString('hex'),
     resave: false,
     saveUninitialized: true,
+    maxAge: ONE_WEEK,
     cookie: {
       secure: false
-    }
+    },
+    store: new MongoDBStore({
+      mongooseConnection: mongoose.connection,
+      collection: "sessions"
+    })
   })
 );
 app.use(passport.initialize());
