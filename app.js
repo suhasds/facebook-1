@@ -63,7 +63,13 @@ app.use(passport.session());
 
 //Using Routes
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/users", function(req,res,next) {
+  if(req.user){
+    next();
+  }
+
+  res.redirect("/auth/login");
+}, usersRouter);
 app.use("/auth", authRouter);
 app.use("/signup", signupRouter);
 
