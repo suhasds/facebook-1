@@ -4,10 +4,7 @@ let loginController = require('../controllers/loginController');
 let passport = require('passport');
 
 router.get('/login',loginController.show);
-router.post('/login',function (req, res, next) {
-    console.log(req.body);
-    next();
-}, passport.authenticate('local',{
+router.post('/login',passport.authenticate('local',{
     successRedirect: "/users",
     failureRedirect: "/auth/login"
 }));

@@ -1,4 +1,3 @@
 module.exports = {
-    show: function(req,res){res.render("login");},
-    store: function(req,res){}
+    show: function(req,res){res.render("login");}
 }
