@@ -11,7 +11,8 @@ const passport = require("./config/passport");
 const isAuthenticated = require("./middleware/isAuthenticated");
 const MongoDBStore = require("connect-mongo")(session);
 
-const Post = require('./models/Post');
+const Post = require("./models/Post");
+const Comment = require("./models/Comment");
 
 const authenticationRouter = require("./routes/auth");
 const signupRouter = require("./routes/signup");
@@ -50,11 +51,11 @@ app.use(
     saveUninitialized: false,
     cookie: {
       secure: false,
-      maxAge: ONE_WEEK,
+      maxAge: ONE_WEEK
     },
     store: new MongoDBStore({
-      mongooseConnection: mongoose.connection,
-    }),
+      mongooseConnection: mongoose.connection
+    })
   })
 );
 
@@ -69,12 +70,30 @@ app.use("/", indexRouter);
 app.post("/posts", function(req, res) {
   const post = req.body.post;
 
-  Post.create({
-    content: post,
-    user: "5b3788f7781e422c6e3e5322",
-  }, function (err, post) {
-    res.redirect("/");
-  });
+  Post.create(
+    {
+      content: post,
+      user: "5b40746d23545c0df78cb4bc"
+    },
+    function(err, post) {
+      res.redirect("/");
+    }
+  );
+});
+app.post("/posts/:id/comments", function(req, res) {
+  const id = req.params.id;
+
+  Comment.create(
+    { content: req.body.comment, post: id, user: "5b40746d23545c0df78cb4bc" },
+    function(err, comment) {
+      console.log(id);
+      Post.findById(id,function(err,post){
+        post.comments.push(comment);
+        post.save();
+      }); 
+      res.redirect("/");
+    }
+  );
 });
 
 // catch 404 and forward to error handler

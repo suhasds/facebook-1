@@ -21,3 +21,13 @@
 .mr8 {
   margin-right: 8px;
 }
+
+.fa-thumbs-up {
+  color: blue;
+}
+
+.like-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}

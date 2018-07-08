@@ -13,9 +13,8 @@ router.post(
   })
 );
 
-router.get("/logout", function(req, res) {
-  req.logOut();
-
+router.post("/logout",function(req,res){
+  req.logout();
   res.redirect("/auth/login");
 });
 

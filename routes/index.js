@@ -11,12 +11,12 @@ router.get("/", function(req, res, next) {
       sort: {
         createdAt: "desc",
       },
-    },
+    }).populate("comments").exec(
     function(err, posts) {
       if (err) {
         return res.send("error");
       }
-
+      console.log(posts[0])
       res.render("wall", {
         posts: posts,
       });
