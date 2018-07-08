@@ -7,18 +7,19 @@ passport.use(
   new LocalStrategy(
     {
       usernameField: "email",
-      passwordField: "password",
+      passwordField: "password"
     },
     function(email, password, cb) {
       User.findOne({ email: email }, function(err, user) {
         if (err) {
           return cb(err);
         }
-
-        if (!bcrypt.compareSync(password, user.password)) {
-          return cb(null, false, {
-            message: "Invalid credentials",
-          });
+        if (user) {
+          if (!bcrypt.compareSync(password, user.password)) {
+            return cb(null, false, {
+              message: "Invalid credentials"
+            });
+          }
         }
 
         return cb(null, user);

@@ -16,7 +16,6 @@ const Comment = require("./models/Comment");
 
 const authenticationRouter = require("./routes/auth");
 const signupRouter = require("./routes/signup");
-
 const indexRouter = require("./routes/index");
 
 const { HOST = "localhost", PORT = 27017 } = process.env;
@@ -66,7 +65,7 @@ app.use(passport.session());
 app.use("/auth", authenticationRouter);
 app.use("/signup", signupRouter);
 
-app.use("/", indexRouter);
+app.use("/", isAuthenticated(), indexRouter);
 app.post("/posts", function(req, res) {
   const post = req.body.post;
 
