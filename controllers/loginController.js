@@ -8,7 +8,7 @@ module.exports = {
   store: function(req, res, next) {
     passport.authenticate("local", function(err, user, info) {
       if (err) {
-        return res.send(err);
+        return res.render("error");
       }
 
       if (!user) {
@@ -19,7 +19,7 @@ module.exports = {
         if (error) {
           return next(error);
 
-          res.redirect("/users");
+          res.redirect("/");
         }
       });
     })(req, res, next);

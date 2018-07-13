@@ -8,12 +8,12 @@ router.get("/login", loginController.show);
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/users",
+    successRedirect: "/",
     failureRedirect: "/auth/login",
   })
 );
 
-router.post("/logout",function(req,res){
+router.get("/logout",function(req,res){
   req.logout();
   res.redirect("/auth/login");
 });

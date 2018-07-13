@@ -11,14 +11,6 @@ const passport = require("./config/passport");
 const isAuthenticated = require("./middleware/isAuthenticated");
 const MongoDBStore = require("connect-mongo")(session);
 
-const Post = require("./models/Post");
-const Comment = require("./models/Comment");
-
-const authenticationRouter = require("./routes/auth");
-const signupRouter = require("./routes/signup");
-
-const indexRouter = require("./routes/index");
-
 const { HOST = "localhost", PORT = 27017 } = process.env;
 const ONE_WEEK = 60 * 24 * 7 * 60 * 1000;
 
@@ -32,6 +24,12 @@ mongoose.connect(
 );
 
 var app = express();
+
+//Routes
+const authenticationRouter = require("./routes/auth");
+const signupRouter = require("./routes/signup");
+const postRouter = require("./routes/posts");
+const indexRouter = require("./routes/index");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -63,38 +61,11 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 app.use("/auth", authenticationRouter);
 app.use("/signup", signupRouter);
-
-app.use("/", indexRouter);
-app.post("/posts", function(req, res) {
-  const post = req.body.post;
-
-  Post.create(
-    {
-      content: post,
-      user: "5b40746d23545c0df78cb4bc"
-    },
-    function(err, post) {
-      res.redirect("/");
-    }
-  );
-});
-app.post("/posts/:id/comments", function(req, res) {
-  const id = req.params.id;
-
-  Comment.create(
-    { content: req.body.comment, post: id, user: "5b40746d23545c0df78cb4bc" },
-    function(err, comment) {
-      console.log(id);
-      Post.findById(id,function(err,post){
-        post.comments.push(comment);
-        post.save();
-      }); 
-      res.redirect("/");
-    }
-  );
-});
+app.use("/posts", isAuthenticated(), postRouter);
+app.use("/", isAuthenticated(), indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema(
     age: Number,
     gender: {
       type: String,
-      enum: ["m", "f"],
+      enum: ["m", "f"]
     },
     country: String,
     relationshipStatus: {
@@ -19,20 +19,20 @@ const userSchema = new mongoose.Schema(
         "in a relationship",
         "divorced",
         "married",
-        "it's complicated",
-      ],
+        "it's complicated"
+      ]
     },
     profilePhotoUrl: String,
     coverPhotoUrl: String,
     friends: [
       {
         ref: "User",
-        type: mongoose.Schema.Types.ObjectId,
-      },
-    ],
+        type: mongoose.Schema.Types.ObjectId
+      }
+    ]
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 
