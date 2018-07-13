@@ -11,16 +11,6 @@ const passport = require("./config/passport");
 const isAuthenticated = require("./middleware/isAuthenticated");
 const MongoDBStore = require("connect-mongo")(session);
 
-<<<<<<< HEAD
-=======
-const Post = require("./models/Post");
-const Comment = require("./models/Comment");
-
-const authenticationRouter = require("./routes/auth");
-const signupRouter = require("./routes/signup");
-const indexRouter = require("./routes/index");
-
->>>>>>> 90978f43618864563381b9d0f96f3f6cdd3586eb
 const { HOST = "localhost", PORT = 27017 } = process.env;
 const ONE_WEEK = 60 * 24 * 7 * 60 * 1000;
 
