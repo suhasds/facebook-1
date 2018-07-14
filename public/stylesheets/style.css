@@ -22,12 +22,67 @@
   margin-right: 8px;
 }
 
-.fa-thumbs-up {
-  color: blue;
-}
-
 .like-button {
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+
+.img-circle {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-end {
+  align-items: end;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.text-sm {
+  font-size: 12px !important;
+}
+
+.no-border {
+  border: none !important;
+}
+
+.comment-pic {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+.comment-content {
+  font-size: 13px;
+  border-radius: 1rem;
+  background: #eff1f3 !important;
+  padding: 8px 10px;
+}
+
+body {
+  background: #eff1f3 !important;
+}
+
+.comment-box {
+  border-radius: 1rem !important;
+  background: #eff1f3 !important;
+}
+
+.wall-width {
+  max-width: 800px !important;
+}
+
+.no-anchor-color {
+  color: inherit;
 }

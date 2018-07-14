@@ -1,3 +1,6 @@
+const Comment = require("../models/Comment");
+const Post = require("../models/Post");
+
 module.exports = {
   create: function(req, res) {
     const post = req.body.post;
@@ -14,7 +17,6 @@ module.exports = {
   },
   addComment: function(req, res) {
     const id = req.params.id;
-
     Comment.create(
       { content: req.body.comment, post: id, user: req.user.id },
       function(err, comment) {

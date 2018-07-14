@@ -33,7 +33,7 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(id, cb) {
-  User.findById(id, cb);
+  User.findById(id, ['-password'],cb);
 });
 
 module.exports = passport;

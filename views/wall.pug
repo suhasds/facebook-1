@@ -1,7 +1,7 @@
 extends navigation
 
 block content
-  .container
+  .container.wall-width
     .card
       .card-header
         Make Post
@@ -16,18 +16,32 @@ block content
         .post
           .card
             .card-body
-              p= post.content
-              .like-button
-                span.fas.fa-thumbs-up.mr8(title='Like Post')
-            .comments
-            ul.list-group
-              each comment in post.comments
-                li.list-group-item.d-flex.justify-content-between.align-items-center= comment.content
-                  .like-button
-                    span.fas.fa-thumbs-up.mr8(title='Like Comment')
+              div.flex.align-end
+                img.img-circle(src="https://picsum.photos/40/40")
+                div.flex.column.ml-2
+                  p.mb-0.text-primary Ankur Heble
+                  p.text-muted.text-sm a few seconds ago
+              div.flex.column
+                p= post.content
+              hr
+              div.flex
+                a.no-anchor-color.fa.fa-thumbs-up.m-auto(href="#") Like
+                a.no-anchor-color.fa.fa-comment.m-auto(href="#") Comment
+                a.no-anchor-color.fa.fa-share-square.m-auto(href="#") Share
+              hr
+              div.comments
+                ul.list-group
+                  each comment in post.comments
+                    li.list-group-item.no-border
+                      div.flex
+                        img.comment-pic.img-circle(src="https://picsum.photos/30/30")
+                        div.flex.column.ml-2
+                          p.mb-0.ml-2.comment-content=comment.content
+                          div.ml-2.flex
+                            a.text-sm.no-underline(href="#") Like
+                            p.text-sm.ml-2.text-muted July 12
             .card-footer
                 form(method="POST" action="/posts/" + post.id + "/comments")
-                  .flex
-                    input.form-control(type="text" placeholder="Say something, nice..." name="comment").mr8
-                    button.btn.btn-sm.btn-warning(type="submit") Comment
-          
+                  div.flex.align-center
+                    img.comment-pic.img-circle.mr-2(src="https://picsum.photos/30/30")
+                    input.form-control.comment-box(type="text" placeholder="Write a comment..." name="comment" style="height:30px")        

@@ -1,8 +1,8 @@
 extends layout
 
 block navigation
-  nav.navbar.navbar-expand-lg.navbar-light.bg-facebook
-    a.navbar-brand.text-light(href='/') facebook
+  nav.navbar.navbar-expand-lg.navbar-light.bg-facebook.align-end
+    a.navbar-brand.text-light.mr-5(href='/') facebook
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
@@ -10,12 +10,12 @@ block navigation
         li.nav-item.active
           form.form-inline.my-2.my-lg-0
             input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search')
-      ul.navbar-nav.mr-auto
+      ul.navbar-nav
         li
           a.nav-link(href="/profile")
-            img.img-rounded(src=user.profilePhotoUrl alt="Profile Pic")
-            span.text-light Profile
-      ul.navbar-nav
+            img.img-circle(src="https://picsum.photos/30/30" alt="Profile Pic")
+            span.ml-2.text-light Ankur
+      ul.ml-2.navbar-nav
         li
           a.nav-link.text-light(href="/auth/logout") Logout
 block content
