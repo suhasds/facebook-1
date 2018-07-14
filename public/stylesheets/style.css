@@ -86,3 +86,8 @@ body {
 .no-anchor-color {
   color: inherit;
 }
+
+.bg-transparent {
+  border: none !important;
+  background: transparent;
+}
