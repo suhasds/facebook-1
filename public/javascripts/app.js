@@ -8,7 +8,7 @@
     switch (resource) {
       case "comment":
         $.ajax({
-          url: "comments/${id}/likes",
+          url: `/comments/${id}/likes`,
           type: "POST"
         }).done(function(response) {
           console.log(response);
@@ -16,7 +16,7 @@
         break;
       case "post":
         $.ajax({
-          url: "posts/${id}/likes",
+          url: `/posts/${id}/likes`,
           type: "POST"
         }).done(function(response) {
           console.log(response);
