@@ -19,13 +19,13 @@ block content
               div.flex.align-end
                 img.img-circle(src="https://picsum.photos/40/40")
                 div.flex.column.ml-2
-                  p.mb-0.text-primary Ankur Heble
-                  p.text-muted.text-sm a few seconds ago
+                  p.mb-0.text-primary= user.name
+                  p.text-muted.text-sm= user.createdAt
               div.flex.column
                 p= post.content
               hr
               div.flex
-                a.no-anchor-color.fa.fa-thumbs-up.m-auto(href="#") Like
+                a.no-anchor-color.fa.fa-thumbs-up.m-auto.like-btn(href="#",data-id=post.id,data-resource-type="post") Like
                 a.no-anchor-color.fa.fa-comment.m-auto(href="#") Comment
                 a.no-anchor-color.fa.fa-share-square.m-auto(href="#") Share
               hr
@@ -38,8 +38,8 @@ block content
                         div.flex.column.ml-2
                           p.mb-0.ml-2.comment-content=comment.content
                           div.ml-2.flex
-                            a.text-sm.no-underline(href="#") Like
-                            p.text-sm.ml-2.text-muted July 12
+                            a.text-sm.no-underline.like-btn(href="#",data-id=comment.id,data-resource-type="comment") Like
+                            p.text-sm.ml-2.text-muted= comment.createdAt
             .card-footer.bg-transparent
                 form(method="POST" action="/posts/" + post.id + "/comments")
                   div.flex.align-center

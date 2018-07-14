@@ -11,12 +11,12 @@ module.exports = {
         user: req.user.id
       },
       function(err, post) {
-        res.redirect("/");
+        res.redirect("/",{user : req.user});
       }
     );
   },
   addComment: function(req, res) {
-    const id = req.params.id;
+    const id = req.params.id;if (err) res.render("error", { error: err });
     Comment.create(
       { content: req.body.comment, post: id, user: req.user.id },
       function(err, comment) {
@@ -25,8 +25,17 @@ module.exports = {
           post.comments.push(comment);
           post.save();
         });
-        res.redirect("/");
+        res.redirect("/",{user : req.user});
       }
     );
+  },
+  likePost: function(req, res) {
+    const id = req.params.id;
+    Post.findById(id, function(err, post) {
+      if (err) res.render("error", { error: err });
+      post.likes++;
+      post.save();
+      res.json({success : true});
+    });
   }
 };

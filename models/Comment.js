@@ -3,18 +3,18 @@ const mongoose = require("mongoose");
 const commentSchema = new mongoose.Schema(
   {
     content: String,
-    likes: Number,
+    likes: { type: Number, default: 0 },
     post: {
       ref: "Post",
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId
     },
     user: {
       ref: "User",
-      type: mongoose.Schema.Types.ObjectId,
-    },
+      type: mongoose.Schema.Types.ObjectId
+    }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 
