@@ -6,6 +6,9 @@ block content
     .card-body
       form(action="/signup", method="POST")
         .form-group
+          label(for='name') Name
+          input#name.form-control(type='name', name="name", aria-describedby='nameHelp', placeholder='Enter Name', auto-complete="off")
+        .form-group  
           label(for='email') Email address
           input#email.form-control(type='email', name="email", aria-describedby='emailHelp', placeholder='Enter email', auto-complete="off")
         .form-group

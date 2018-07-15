@@ -33,8 +33,12 @@ router.post("/comments/:id/likes", function(req, res, next) {
   Comment.findById(req.params.id, function(err, comment) {
     if (err) res.render("error", { error: err });
     comment.likes++;
-    comment.save();
-    res.json({success : true});
+    comment.save(function cb(err) {
+      if(err){
+        console.log(err);
+      }
+    });
+    res.json({likes:comment.likes});
   });
 });
 

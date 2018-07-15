@@ -34,8 +34,9 @@ module.exports = {
     Post.findById(id, function(err, post) {
       if (err) res.render("error", { error: err });
       post.likes++;
-      post.save();
-      res.json({success : true});
+      post.save(function(err){
+        res.json({likes:post.likes});        
+      });
     });
   }
 };
